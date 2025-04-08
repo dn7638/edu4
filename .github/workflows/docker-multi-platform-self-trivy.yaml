@@ -57,7 +57,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: ${{ github.event.inputs.name }}
-
+      
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@v5
@@ -67,6 +67,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
+          builder: builder-container  # ← 새로 만든 빌더 이름 명시!
 
       - name: Scan Docker image with Trivy
         uses: aquasecurity/trivy-action@master
