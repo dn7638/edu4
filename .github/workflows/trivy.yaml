@@ -31,11 +31,10 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: sigstore/cosign-installer@v3.7.0
 
-      - name: Setup Docker buildx (with DNS config)
+      - name: Setup Docker buildx (builtin)
         uses: docker/setup-buildx-action@v3
         with:
-          driver: docker-container
-          config: .github/buildkit.toml
+          driver: docker
           install: true
 
       - name: Log in to Docker Hub
