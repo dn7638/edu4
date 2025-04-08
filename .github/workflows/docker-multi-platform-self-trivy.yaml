@@ -31,12 +31,11 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: sigstore/cosign-installer@v3.7.0
 
-      # ✅ DNS가 설정된 buildx builder 생성
-      - name: Setup Docker buildx (with DNS fix)
+      - name: Setup Docker buildx (with DNS config)
         uses: docker/setup-buildx-action@v3
         with:
           driver: docker-container
-          buildkitd-flags: --dns=8.8.8.8
+          config: .github/buildkit.toml
           install: true
 
       - name: Log in to Docker Hub
